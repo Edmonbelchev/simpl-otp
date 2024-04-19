@@ -18,11 +18,6 @@ After installing the package, run the migration command to create the necessary 
 php artisan migrate
 ```
 
-After installing the package, run the migration command to create the necessary database table:
-```bash
-php artisan migrate
-```
-
 The package will automatically register its service provider and facade.
 
 ## Configuration
