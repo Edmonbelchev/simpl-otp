@@ -1,0 +1,38 @@
+{
+    "name": "tech-ed/simpl-otp",
+    "description": "A simple and lightweight Laravel package for generating and verifying one-time passwords (OTPs), enhancing authentication security in your Laravel applications.",
+    "type": "library",
+    "license": "MIT",
+    "autoload": {
+        "psr-4": {
+            "TechEd\\SimplOtp\\": "src/"
+        }
+    },
+    "authors": [
+        {
+            "name": "Edmon Belchev",
+            "email": "edmon.cekov@gmail.com"
+        }
+    ],
+    "extra": {
+        "laravel": {
+            "providers": [
+                "TechEd\\SimplOtp\\SimplOtpServiceProvider"
+            ],
+            "aliases": {
+                "SimplOtp": "TechEd\\SimplOtp"
+            }
+        }
+    },
+    "minimum-stability": "dev",
+    "require": {
+        "php": "^8.2",
+        "laravel/framework": "^11.0"
+    },
+    "repositories": [
+        {
+            "type": "vcs",
+            "url": "https://github.com/Edmonbelchev/simpl-otp.git"
+        }
+    ]
+}
