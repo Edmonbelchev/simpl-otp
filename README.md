@@ -109,8 +109,8 @@ return $otp;
 
 This example generates an OTP for the authenticated user's email address and sends it via email using the EmailOtpVerification notification class.
 
-## Support the developer
-If SimplOtp has been helpful to you and you'd like to support its development, consider buying the developer a cup of coffee!
+## Support the Developer
+If SimplOtp has been helpful to you and you'd like to support its development, consider buying the developer a cup of coffee! ☕
 
 [!["Buy Me A Coffee"](https://www.buymeacoffee.com/assets/img/custom_images/orange_img.png)](https://buymeacoffee.com/edmonbelchev)
 
