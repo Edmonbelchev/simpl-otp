@@ -94,7 +94,7 @@ php artisan simplotp:publish-frontend
    - Generate OTP: `/simplotp/generate`
    - Verify OTP: `/simplotp/verify`
 
-3. If you want to customize the views, you can find them in `resources/views/vendor/simplotp/`.
+3. The views are self-contained and include basic Bootstrap styling. If you want to customize the views, you can find them in `resources/views/vendor/simplotp/`.
 
 4. To use the views in your own controllers or routes, you can use:
 
@@ -102,6 +102,20 @@ php artisan simplotp:publish-frontend
 return view('simplotp::generate');
 return view('simplotp::verify');
 ```
+
+5. If you want to integrate these views into your existing layout, you can modify the published views. For example, if you have a layout file named `app.blade.php`, you could update the views to extend this layout:
+
+```php
+@extends('layouts.app')
+
+@section('content')
+    // The existing view content goes here
+@endsection
+```
+
+Remember to adjust the content section name (`@section('content')`) to match your layout's content area.
+
+6. The views use Bootstrap for styling. If you're not using Bootstrap in your application, you can remove the Bootstrap link and add your own CSS styles.
 
 ### Customization
 
