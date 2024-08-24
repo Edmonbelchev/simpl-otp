@@ -4,6 +4,7 @@ namespace TechEd\SimplOtp\Http\Controllers;
 
 use Illuminate\Http\Request;
 use TechEd\SimplOtp\SimplOtp;
+use App\Http\Controllers\Controller;
 
 class OtpController extends Controller
 {
@@ -20,11 +21,11 @@ class OtpController extends Controller
 
         $result = SimplOtp::generate($request->identifier);
 
-        if ($result->status) {
-            return back()->with('otp', $result->token);
-        }
+        $result->status 
+                ? session()->flash('otp', $result->token)
+                : session()->flash('error', $result->message);
 
-        return back()->with('error', $result->message);
+        return view('simplotp::generate');
     }
 
     public function showVerifyForm()
@@ -41,6 +42,8 @@ class OtpController extends Controller
 
         $result = SimplOtp::validate($request->identifier, $request->token);
 
-        return back()->with('message', $result->message);
+        session()->flash('message', $result->message);
+
+        return view('simplotp::verify');
     }
 }
