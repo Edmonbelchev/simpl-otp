@@ -1,114 +1,67 @@
 # SimplOtp
 
-SimplOtp is a Laravel package that simplifies the generation and validation of one-time passwords (OTPs) in your Laravel applications.
-
-This package is inspired by [ichtrojan/laravel-otp](https://github.com/ichtrojan/laravel-otp) but modified to be a little bit more flexible.
+A simple OTP (One-Time Password) package for Laravel applications.
 
 ## Installation
 
-You can install the SimplOtp package via Composer:
+You can install the package via composer:
 
 ```bash
-composer require tech-ed/simpl-otp
+composer require teched/simplotp
 ```
 
-After installing the package, run the migration command to create the necessary database table:
+## Usage
+
+### Backend
+
+Generate an OTP:
+
+```php
+use TechEd\SimplOtp\SimplOtp;
+
+$result = SimplOtp::generate('user@example.com');
+```
+
+Validate an OTP:
+
+```php
+use TechEd\SimplOtp\SimplOtp;
+
+$result = SimplOtp::validate('user@example.com', '1234');
+```
+
+### Frontend Scaffolding
+
+This package now includes Blade views for OTP generation and verification.
+
+1. Publish the frontend files:
 
 ```bash
-php artisan migrate
+php artisan simplotp:publish-frontend
 ```
 
-The package will automatically register its service provider and facade.
+2. The package automatically registers the necessary routes. You can access the OTP generation and verification forms at:
+
+   - Generate OTP: `/simplotp/generate`
+   - Verify OTP: `/simplotp/verify`
+
+3. If you want to customize the views, you can find them in `resources/views/vendor/simplotp/`.
+
+4. To use the views in your own controllers or routes, you can use:
+
+```php
+return view('simplotp::generate');
+return view('simplotp::verify');
+```
 
 ## Configuration
 
-To customize SimplOtp's behavior, you can publish its configuration file using the following artisan command:
+Publish the configuration file:
 
 ```bash
 php artisan vendor:publish --provider="TechEd\SimplOtp\SimplOtpServiceProvider" --tag="config"
 ```
 
-This command will copy the configuration file `config/simplotp.php` to your application's `config` directory, where you can modify it according to your needs.
-
-### Configuration Options
-
-- **Success Messages**: Customize success messages for OTP generation and validation.
-- **Error Messages**: Customize error messages for various failure scenarios.
-- **OTP Settings**: Configure OTP length, type (numeric or alphanumeric), and validity period in minutes.
-
-```php
-return [
-    'success_messages' => [
-        'otp_generated' => 'OTP generated',
-        'otp_valid' => 'OTP is valid',
-    ],
-    'error_messages' => [
-        'invalid_type' => 'Invalid OTP type',
-        'expired_otp' => 'OTP Expired',
-        'invalid_otp' => 'Invalid OTP',
-        'otp_not_found' => 'OTP not found',
-    ],
-    'otp' => [
-        'length' => 4,
-        'type' => 'numeric',
-        'validity' => 15,
-    ]
-];
-```
-
-## Usage
-
-### Generating an OTP
-
-You can generate an OTP using the `SimplOtp::generate()` method. It requires an identifier associated with the OTP.
-
-```php
-use TechEd\SimplOtp\SimplOtp;
-
-$identifier = 'awesome@user.com';
-$otp = SimplOtp::generate($identifier);
-```
-
-### Validating an OTP
-
-To validate an OTP, use the `SimplOtp::validate()` method, passing the identifier and the OTP token.
-
-```php
-$identifier = 'awesome@user.com';
-$token = '1234'; // OTP token to validate
-$result = SimplOtp::validate($identifier, $token);
-```
-
-### Customization
-
-You can customize success and error messages by editing the `config/simplotp.php` configuration file. Additionally, you can adjust OTP settings to suit your application's requirements.
-
-### Generate Email Notification
-To create a basic email template inside the Notifications folder, run the following artisan command:
-
-```bash
-php artisan vendor:publish --provider="TechEd\SimplOtp\SimplOtpServiceProvider" --tag="email"
-```
-
-This command allows you to customize the email notification template according to your specific requirements.
-
-### Email Notification Example
-
-To send an OTP via email, you can use Laravel's built-in notification system along with the provided `EmailOtpVerification` notification class.
-
-```php
-$user = auth()->user();
-$otp = SimplOtp::generate($user->email);
-
-if($otp->status === true){
-    $user->notify(new EmailOtpVerification($otp->token));
-}
-
-return $otp;
-```
-
-This example generates an OTP for the authenticated user's email address and sends it via email using the EmailOtpVerification notification class.
-
 ## License
 
-The SimplOtp package is open-sourced software licensed under the [MIT license](LICENSE.md).
+The MIT License (MIT). Please see [License File](LICENSE.md) for more information.
