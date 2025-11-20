@@ -4,11 +4,11 @@ A Laravel package for simple OTP generation and validation with built-in Blade f
 
 ## Features
 
-- 🔐 Generate and validate OTPs
-- 🎨 Ready-to-use Blade views
-- 📧 Email notification support
-- ⚙️ Configurable settings
-- 🚀 Easy integration
+- Generate and validate OTPs
+- Ready-to-use Blade views
+- Email notification support
+- Configurable settings
+- Easy integration
 
 ## Quick Start
 
